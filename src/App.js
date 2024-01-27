@@ -1,14 +1,26 @@
 import React from 'react';
 import UmNavBar from './components/pages/UmNavBar';
 import HomePage from './components/pages/HomePage';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+} from "react-router-dom";
+import ProductsPage from './components/pages/ProductsPage';
 
-function App() {
+
+const App = () => {
   return (
-    <>
-      <UmNavBar />
-      <HomePage />
-    </>
+    <Router>
+        <UmNavBar />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/products' element={<ProductsPage />} />
+
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

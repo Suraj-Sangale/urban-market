@@ -5,7 +5,6 @@ import '../global.css'
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import SingleDropdown from '../molecules/SingleDropdown';
-import CustomDropdown from '../molecules/CustomDropdown';
 
 
 
@@ -37,7 +36,8 @@ const UmNavBar = () => {
 
       <Navbar expand="lg" className="bg-body-tertiary" style={{ height: '5rem' }}>
         <Container >
-          <Navbar.Brand href="#home">Urban Market</Navbar.Brand>
+          
+          <Navbar.Brand href="/">Urban Market</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'flex-end' }}>
             <Form className="d-flex " onSubmit={(e) => handleSearch(e)} inline>

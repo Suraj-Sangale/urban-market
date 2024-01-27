@@ -1,7 +1,17 @@
-.searchright{
-    background-color: white;
-    height: 50px;
-     width:50px;
-    border-radius:50px 0px 0px 50px;
-    cursor: pointer;
+
+
+.carousel-control-prev,
+.carousel-control-next {
+  top: 35% !important;
+  height: 3rem;
+  width: 3rem !important;
+  margin: 1rem !important;
+  align-items: center !important;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgba(241, 241, 241, 0.63);
 }
