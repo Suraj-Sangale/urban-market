@@ -1,0 +1,7 @@
+.searchright{
+    background-color: white;
+    height: 50px;
+     width:50px;
+    border-radius:50px 0px 0px 50px;
+    cursor: pointer;
+}
