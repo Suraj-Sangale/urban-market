@@ -13,7 +13,10 @@ import ProductsPage from './components/pages/ProductsPage';
 const App = () => {
   return (
     <Router>
+      <div style={{ position: 'relative' }}>
+
         <UmNavBar />
+      </div>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/products' element={<ProductsPage />} />

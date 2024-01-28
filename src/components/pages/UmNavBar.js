@@ -12,7 +12,7 @@ const UmNavBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const searchTerm = e.target.elements.searchTerm.value;
-    alert(`You searched for: ${searchTerm}`);
+    alert(` currently stock of ${searchTerm} not available`);
   };
 
   const handleCartClick = () => {
@@ -34,7 +34,7 @@ const UmNavBar = () => {
   return (
     <>
 
-      <Navbar expand="lg" className="bg-body-tertiary" style={{ height: '5rem' }}>
+      <Navbar expand="lg" className="bg-body-tertiary fixed-top" style={{ height: '5rem' }} >
         <Container >
           
           <Navbar.Brand href="/">Urban Market</Navbar.Brand>
@@ -52,7 +52,7 @@ const UmNavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Navbar style={{ backgroundColor: 'pink' }}>
+      <Navbar style={{ backgroundColor: 'pink' , marginTop: '5rem' }} fixed="top">
         <Container>
           <SingleDropdown title="Categories" options={Groceries} />
           <SingleDropdown title="Fruits" options={Fruits} />

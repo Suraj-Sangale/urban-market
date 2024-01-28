@@ -15,3 +15,38 @@
 .carousel-control-next:hover {
   background-color: rgba(241, 241, 241, 0.63);
 }
+.originalPrice {
+  font-weight: 600;
+  text-decoration: line-through;
+  color: rgb(110, 110, 110);
+  margin-inline: 0.5rem;
+}
+.ODPrice{
+  display: flex;
+  flex-direction: row;
+}
+.discountPercentage{
+  background-color: rgb(211, 252, 211);
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+  color: rgb(0, 179, 24);
+  padding-inline: 0.2rem;
+}
+.titleOne{
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 1rem;
+}
+.roundedButton{
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: rgb(17, 0, 255);
+  background-color: transparent;
+  font-weight: 600;
+  border:2px solid #ccc;
+}
