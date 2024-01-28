@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Container, InputGroup, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Container} from 'react-bootstrap';
 import '../global.css'
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
