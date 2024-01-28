@@ -3,17 +3,17 @@ import { specialDealsImages } from '../Data/Data'
 import MultiImageSlider from '../molecules/MultiImageSlider'
 
 const SpecialDeals = () => {
-  return (
-    <div>
-        <MultiImageSlider
+    return (
+        <div>
+            <MultiImageSlider
                 title={'Special Deals'}
                 desktopItems={6}
                 tabletItems={5}
                 mobileItems={4}
                 ImgArr={specialDealsImages}
             />
-    </div>
-  )
+        </div>
+    )
 }
 
 export default SpecialDeals

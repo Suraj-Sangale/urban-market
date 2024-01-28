@@ -50,3 +50,33 @@
   font-weight: 600;
   border:2px solid #ccc;
 }
+
+/* AP */
+.APCard{
+  /* height: 35rem !important; */
+}
+.APName{
+  font-weight: 400;
+  color: rgb(66, 66, 66) ;
+}
+.APPrice{
+font-weight: 700;
+font-size: 1.2rem;
+
+}
+.APoriginalPrice{
+  text-decoration: line-through;
+  margin-inline: 0.3rem;
+  font-weight: 500;
+  color: rgb(114, 114, 114);
+
+}
+.APDiscount{
+  background-color: rgb(211, 252, 211);
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+  color: rgb(0, 179, 24);
+  padding-inline: 0.2rem;
+  font-weight: 500;
+
+}

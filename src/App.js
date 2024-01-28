@@ -5,9 +5,9 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
 } from "react-router-dom";
-import ProductsPage from './components/pages/ProductsPage';
+// import ProductsPage from './components/pages/ProductsPage';
+import ViewAllProducts from './components/pages/ViewAllProducts';
 
 
 const App = () => {
@@ -19,7 +19,8 @@ const App = () => {
       </div>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/products' element={<ProductsPage />} />
+        <Route path='/products' element={<ViewAllProducts />} />
+        {/* <Route path='/products' element={<ProductsPage />} /> */}
 
       </Routes>
     </Router>
