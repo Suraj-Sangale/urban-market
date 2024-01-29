@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UmNavBar from './components/pages/UmNavBar';
 import HomePage from './components/pages/HomePage';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 // import ProductsPage from './components/pages/ProductsPage';
 import ViewAllProducts from './components/pages/ViewAllProducts';
@@ -15,6 +16,7 @@ import ProductDetails from './components/pages/ProductDetails';
 
 
 const App = () => {
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
@@ -23,7 +25,8 @@ const App = () => {
           <UmNavBar />
         </div>
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path='/home' element={<HomePage />} />
           <Route path='/products' element={<ViewAllProducts />} />
           <Route path='/productDetails' element={<ProductDetails />} />
 
