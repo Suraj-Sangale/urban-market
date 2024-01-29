@@ -7,26 +7,26 @@ import { IoPersonSharp } from "react-icons/io5";
 import SingleDropdown from '../molecules/SingleDropdown';
 import { useSelector } from 'react-redux';
 import { Categories } from '../Data/Data';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const UmNavBar = () => {
 
   const cartState = useSelector(state => state.cart);
+  const navigate = useNavigate()
 
-  const { items, quantity } = cartState;
-  console.log('items', items);
-
+  const { cartItems } = cartState;
+  let quantity = cartItems.length
   const handleSearch = (e) => {
     e.preventDefault();
     const searchTerm = e.target.elements.searchTerm.value;
-    alert(` currently stock of ${searchTerm} not available`);
+    alert(` currently stock for ${searchTerm} is not available`);
   };
 
   const handleCartClick = () => {
-    console.log('quantity', quantity);
-
-    alert('You clicked on the cart' + quantity);
+    navigate('/checkout')
+    // alert('You clicked on the cart' + quantity);
   };
 
   const handleSignIn = () => {
@@ -51,7 +51,7 @@ const UmNavBar = () => {
                   <FaShoppingCart style={{ fontSize: '20px' }} />
 
                   <div className="cart-badge">
-                    <span>{quantity}</span>
+                    <span>{quantity < -1 ? 0 : quantity}</span>
                   </div>
                 </Nav.Link>
               </div>

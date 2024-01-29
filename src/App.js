@@ -13,6 +13,7 @@ import store from './redux/Store';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import ProductDetails from './components/pages/ProductDetails';
+import CheckoutPage from './components/pages/CheckoutPage';
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/home' element={<HomePage />} />
           <Route path='/products' element={<ViewAllProducts />} />
           <Route path='/productDetails' element={<ProductDetails />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
 
         </Routes>
       </Router>

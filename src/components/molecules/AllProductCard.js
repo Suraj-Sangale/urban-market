@@ -8,13 +8,13 @@ const AllProductCard = (props) => {
     const dispatch = useDispatch();
     const [cartQuantity, setCartQuantity] = useState(0);
 
-    const onClickAddToCart = () => {
+    const onClickAddToCart = (product) => {
         setCartQuantity(cartQuantity + 1);
-        dispatch({ type: 'ADD_TO_CART', payload: { aa: 'shjs', jdd: 1 } });
+        dispatch({ type: 'ADD_TO_CART', payload: product });
     };
-    const onClickDecrement = () => {
+    const onClickDecrement = (product) => {
         setCartQuantity(cartQuantity - 1);
-        dispatch({ type: 'REMOVE_FROM_CART', payload: { aa: 'shjs', jdd: 1 } });
+        dispatch({ type: 'REMOVE_FROM_CART', payload: product });
     };
 
     return (
@@ -35,7 +35,7 @@ const AllProductCard = (props) => {
                     {cartQuantity <= 0 && (
                         <Button
                             variant="primary"
-                            onClick={onClickAddToCart}
+                            onClick={() => onClickAddToCart(product)}
                             disabled={cartQuantity > 0}
                             className='mt-1 text-center w-100 rounded-pill'
                         >
@@ -45,9 +45,9 @@ const AllProductCard = (props) => {
 
                     {cartQuantity > 0 && (
                         <div className="d-flex justify-content-end mt-2">
-                            <RoundedButton onClick={onClickDecrement}>-</RoundedButton>
+                            <RoundedButton onClick={() => onClickDecrement(product)}>-</RoundedButton>
                             <span className="m-2 mx-4">{cartQuantity}</span>
-                            <RoundedButton onClick={onClickAddToCart}>+</RoundedButton>
+                            <RoundedButton onClick={() => onClickAddToCart(product)}>+</RoundedButton>
                         </div>
                     )}
                 </Card.Body>

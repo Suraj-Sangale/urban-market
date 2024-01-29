@@ -14,7 +14,6 @@ const ProductCard = ({ product }) => {
         setCartQuantity(cartQuantity + 1);
         // dispatch(addToCart(cartQuantity));
         dispatch({ type: 'ADD_TO_CART', payload: { aa: 'shjs', jdd: 1 } });
-        console.log('cartQuantity', cartQuantity);
 
     };
     const onClickDecrement = () => {
