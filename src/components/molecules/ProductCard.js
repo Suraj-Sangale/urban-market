@@ -19,6 +19,7 @@ const ProductCard = ({ product }) => {
     };
     const onClickDecrement = () => {
         setCartQuantity(cartQuantity - 1);
+        dispatch({ type: 'REMOVE_FROM_CART', payload: { aa: 'shjs', jdd: 1 } });
     };
 
     return (

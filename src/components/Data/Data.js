@@ -100,3 +100,15 @@ export const Allproducts = [
     { id: '12', name: 'saffola active Pro wait watches rice brand base blended oil 1 kg', category: 'Category B', price: 120,originalPrice: 500, discount: 20, availability: true, brand: 'Brand Z', imageUrl: 'https://i.ibb.co/dgpn7C3/11.webp' },
 
 ]
+
+export const Categories = {
+    Groceries: ['Fruits and vegetables', 'dairy and bakery', 'snacks and branded fool', 'beverages', 'personal care', 'home care'],
+    Fruits: ['Apple and pears', 'avocado', ' cherries', 'babies', 'dates'],
+    HomeKitchen: ['Kitchenware', 'home decor', ' furniture', 'tablewear'],
+    Fashion: ['Men', 'women', 'boys', 'girls  '],
+    Electronics: ['Mobile and tablets', 'TV and speaker', ' home appliances', 'computer', 'camera'],
+    Beauty: ['Makeup', 'hair care', 'skin care', 'pregnancy', 'wellness'],
+    HomeImprovement: ['Auto care', 'carpentry', ' electrical', 'hardware and pumping', 'home cleaning', 'home safety'],
+    Sports: ['Toys and games', 'bags and travel luggages', 'fitness equipment'],
+
+  }

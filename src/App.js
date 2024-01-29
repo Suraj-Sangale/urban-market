@@ -11,6 +11,7 @@ import ViewAllProducts from './components/pages/ViewAllProducts';
 import store from './redux/Store';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import ProductDetails from './components/pages/ProductDetails';
 
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/products' element={<ViewAllProducts />} />
-          {/* <Route path='/products' element={<ProductsPage />} /> */}
+          <Route path='/productDetails' element={<ProductDetails />} />
 
         </Routes>
       </Router>

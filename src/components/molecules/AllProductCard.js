@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap';
 import RoundedButton from './RoundedButton';
+import { useDispatch } from 'react-redux';
 
 const AllProductCard = (props) => {
     const { product } = props;
+    const dispatch = useDispatch();
     const [cartQuantity, setCartQuantity] = useState(0);
 
     const onClickAddToCart = () => {
         setCartQuantity(cartQuantity + 1);
+        dispatch({ type: 'ADD_TO_CART', payload: { aa: 'shjs', jdd: 1 } });
     };
     const onClickDecrement = () => {
         setCartQuantity(cartQuantity - 1);
+        dispatch({ type: 'REMOVE_FROM_CART', payload: { aa: 'shjs', jdd: 1 } });
     };
 
     return (

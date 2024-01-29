@@ -11,6 +11,12 @@ const initialState = {
           items: [...state.items, action.payload],
           quantity: state.quantity + 1,
         };
+      case 'REMOVE_FROM_CART':
+        return {
+          ...state,
+          items: [...state.items, action.payload],
+          quantity: state.quantity - 1,
+        };
       default:
         return state;
     }

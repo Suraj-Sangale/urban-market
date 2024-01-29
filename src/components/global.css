@@ -80,3 +80,19 @@ font-size: 1.2rem;
   font-weight: 500;
 
 }
+/* navbar css */
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-weight: 500;
+}

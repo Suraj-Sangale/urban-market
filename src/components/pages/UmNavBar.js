@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import SingleDropdown from '../molecules/SingleDropdown';
 import { useSelector } from 'react-redux';
+import { Categories } from '../Data/Data';
 
 
 
@@ -25,21 +26,13 @@ const UmNavBar = () => {
   const handleCartClick = () => {
     console.log('quantity', quantity);
 
-    alert('You clicked on the cart'+ quantity);
+    alert('You clicked on the cart' + quantity);
   };
 
   const handleSignIn = () => {
     alert('You are not signed in');
   };
 
-  const Groceries = ['Fruits and vegetables', 'dairy and bakery', 'snacks and branded fool', 'beverages', 'personal care', 'home care']
-  const Fruits = ['Apple and pears', 'avocado', ' cherries', 'babies', 'dates']
-  const HomeKitchen = ['Kitchenware', 'home decor', ' furniture', 'tablewear']
-  const Fashion = ['Men', 'women', 'boys', 'girls  ']
-  const Electronics = ['Mobile and tablets', 'TV and speaker', ' home appliances', 'computer', 'camera']
-  const Beauty = ['Makeup', 'hair care', 'skin care', 'pregnancy', 'wellness']
-  const HomeImprovement = ['Auto care', 'carpentry', ' electrical', 'hardware and pumping', 'home cleaning', 'home safety']
-  const Sports = ['Toys and games', 'bags and travel luggages', 'fitness equipment']
   return (
     <>
 
@@ -53,24 +46,31 @@ const UmNavBar = () => {
               <FormControl type="text" name="searchTerm" placeholder="🔍Search Urban Market..." className="mr-sm-2 rounded-pill" style={{ width: '20rem', margin: '1rem' }} />
             </Form>
             <Nav className="ml-auto">
-              <Nav.Link onClick={handleCartClick}>
-                <FaShoppingCart /> </Nav.Link>
+              <div className="cart-icon-container">
+                <Nav.Link onClick={handleCartClick}>
+                  <FaShoppingCart style={{ fontSize: '20px' }} />
+
+                  <div className="cart-badge">
+                    <span>{quantity}</span>
+                  </div>
+                </Nav.Link>
+              </div>
               <Nav.Link onClick={handleSignIn}>
-                <IoPersonSharp />Sign In</Nav.Link>
+                <IoPersonSharp style={{ fontSize: '20px' }} /> Sign In</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <Navbar style={{ backgroundColor: 'pink', marginTop: '5rem' }} fixed="top">
         <Container>
-          <SingleDropdown title="Categories" options={Groceries} />
-          <SingleDropdown title="Fruits" options={Fruits} />
-          <SingleDropdown title="Home & Kitchen" options={HomeKitchen} />
-          <SingleDropdown title="Fashion" options={Fashion} />
-          <SingleDropdown title="Electronics" options={Electronics} />
-          <SingleDropdown title="Beauty" options={Beauty} />
-          <SingleDropdown title="HomeImprovement" options={HomeImprovement} />
-          <SingleDropdown title="Sports" options={Sports} />
+          <SingleDropdown title="Categories" options={Categories.Groceries} />
+          <SingleDropdown title="Fruits" options={Categories.Fruits} />
+          <SingleDropdown title="Home & Kitchen" options={Categories.HomeKitchen} />
+          <SingleDropdown title="Fashion" options={Categories.Fashion} />
+          <SingleDropdown title="Electronics" options={Categories.Electronics} />
+          <SingleDropdown title="Beauty" options={Categories.Beauty} />
+          <SingleDropdown title="Home Improvement" options={Categories.HomeImprovement} />
+          <SingleDropdown title="Sports" options={Categories.Sports} />
         </Container>
       </Navbar>
     </>
