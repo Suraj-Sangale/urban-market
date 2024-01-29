@@ -1,14 +1,21 @@
 
 import React from 'react';
-import { Navbar, Nav, Form, FormControl, Container} from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Container } from 'react-bootstrap';
 import '../global.css'
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import SingleDropdown from '../molecules/SingleDropdown';
+import { useSelector } from 'react-redux';
 
 
 
 const UmNavBar = () => {
+
+  const cartState = useSelector(state => state.cart);
+
+  const { items, quantity } = cartState;
+  console.log('items', items);
+
   const handleSearch = (e) => {
     e.preventDefault();
     const searchTerm = e.target.elements.searchTerm.value;
@@ -16,7 +23,9 @@ const UmNavBar = () => {
   };
 
   const handleCartClick = () => {
-    alert('You clicked on the cart');
+    console.log('quantity', quantity);
+
+    alert('You clicked on the cart'+ quantity);
   };
 
   const handleSignIn = () => {
@@ -36,7 +45,7 @@ const UmNavBar = () => {
 
       <Navbar expand="lg" className="bg-body-tertiary fixed-top" style={{ height: '5rem' }} >
         <Container >
-          
+
           <Navbar.Brand href="/">Urban Market</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'flex-end' }}>
@@ -52,7 +61,7 @@ const UmNavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Navbar style={{ backgroundColor: 'pink' , marginTop: '5rem' }} fixed="top">
+      <Navbar style={{ backgroundColor: 'pink', marginTop: '5rem' }} fixed="top">
         <Container>
           <SingleDropdown title="Categories" options={Groceries} />
           <SingleDropdown title="Fruits" options={Fruits} />

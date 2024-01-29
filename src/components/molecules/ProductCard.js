@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap';
 import RoundedButton from './RoundedButton';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/Actions';
 
 
 
 const ProductCard = ({ product }) => {
     const [cartQuantity, setCartQuantity] = useState(0);
+    const dispatch = useDispatch();
 
-    const onClickAddToCart = () => {
+    const onClickAddToCart = (e) => {
         setCartQuantity(cartQuantity + 1);
+        // dispatch(addToCart(cartQuantity));
+        dispatch({ type: 'ADD_TO_CART', payload: { aa: 'shjs', jdd: 1 } });
+        console.log('cartQuantity', cartQuantity);
+
     };
     const onClickDecrement = () => {
         setCartQuantity(cartQuantity - 1);
@@ -32,7 +39,7 @@ const ProductCard = ({ product }) => {
                 {cartQuantity <= 0 && (
                     <Button
                         variant="primary"
-                        onClick={onClickAddToCart}
+                        onClick={(e) => onClickAddToCart(e)}
                         disabled={cartQuantity > 0}
                         className='my-1 text-center w-100 rounded-pill'
                     >
@@ -46,7 +53,7 @@ const ProductCard = ({ product }) => {
 
                         <RoundedButton onClick={onClickDecrement}>-</RoundedButton>
                         <span className="m-2 ">{cartQuantity}</span>
-                        <RoundedButton onClick={onClickAddToCart}>+</RoundedButton>
+                        <RoundedButton onClick={(e) => onClickAddToCart(e)}>+</RoundedButton>
                         {/* <Button variant="outline-secondary" style={{ borderRadius: '100%' }} onClick={onClickAddToCart}>+</Button> */}
                     </div>
                 )}
