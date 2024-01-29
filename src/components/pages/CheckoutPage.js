@@ -3,12 +3,23 @@ import { Container, Row, Col, Card, Button, ListGroup, Form, Image } from 'react
 import { useDispatch, useSelector } from 'react-redux';
 import RoundedButton from '../molecules/RoundedButton';
 import { combineArrObject, findArrObject } from '../Data/GenericAction';
+import OrderPlacement from './OrderPlacement';
 
 const CheckoutPage = () => {
     const dispatch = useDispatch();
     const { cartItems } = useSelector(state => state.cart);
+    const [showAddress, setShowAddress] = useState(false);
 
-    // const uniqueCartItems = combineArrObject(cartItems);
+    const handleShowAddress = () => setShowAddress(true);
+    const handleCloseAddress = () => setShowAddress(false);
+    const address = {
+        name: 'John Doe',
+        street: ' 5 Sohini Bldg, D J Rd, Vile Parle West (west),',
+        pinCode: 'Mumbai 400088, Maharashtra',
+        PhoneNumber: '2291329',
+    }
+
+
     console.log('cartItems', cartItems);
     const uniqueCartItems = cartItems;
     // console.log('uniqueCartItems',uniqueCartItems);
@@ -58,7 +69,13 @@ const CheckoutPage = () => {
 
     const onClickDecrement = (product) => {
         setCartQuantity(cartQuantity - 1)
-        dispatch({ type: 'REMOVE_FROM_CART', payload: { productId: product.id } });
+        dispatch({
+            type: 'REMOVE_FROM_CART',
+            payload: {
+                productId: product.id,
+                productQuantity: product.quantity
+            }
+        });
 
     };
     const onClickIncrement = (product) => {
@@ -96,7 +113,7 @@ const CheckoutPage = () => {
                                                     {/* <span className='COTotal'>₹{totalOfProduct().toFixed(2)}</span> */}
                                                     <div className="d-flex justify-content-between">
                                                         <RoundedButton onClick={() => onClickDecrement(item)}>-</RoundedButton>
-                                                        <span className="m-2 ">{cartQuantity}</span>
+                                                        <span className="m-2 ">{item.quantity}</span>
                                                         <RoundedButton onClick={() => onClickAddToCart(item)}>+</RoundedButton>
                                                     </div>
                                                 </div>
@@ -128,13 +145,24 @@ const CheckoutPage = () => {
                                     </Row>
                                     <hr />
                                     <Row>
-                                        <Col md={7}>Delivery Fee</Col>
-                                        <Col md={5} className='fw-bolder'> <span className=' text-success '> FREE </span><span className='text-muted text-decoration-line-through' > ₹40.00</span> </Col>
-                                    </Row>
-                                    <hr />
-                                    <Row>
-                                        <Col md={8}>Total</Col>
-                                        <Col md={4} className='fw-bolder'>₹ {totalOfProduct().toFixed(2)}</Col>
+                                        {totalOfProduct() > 250 ?
+                                            <>
+                                                <Col md={7}>Delivery Fee</Col>
+                                                <Col md={5} className='fw-bolder'>
+                                                    <span className=' text-success '> FREE </span>
+                                                    <span className='text-muted text-decoration-line-through' > ₹40.00</span>
+                                                </Col>
+                                            </>
+                                            : totalOfProduct() == 0 ?
+                                                <>
+                                                    <Col md={8}>Delivery Fee</Col>
+                                                    <Col md={4} className='fw-bolder'> ₹0.00</Col>
+                                                </> :
+                                                <>
+                                                    <Col md={8}>Delivery Fee</Col>
+                                                    <Col md={4} className='fw-bolder'> ₹40.00</Col>
+                                                </>
+                                        }
                                     </Row>
                                     <hr />
                                     <Row>
@@ -143,18 +171,35 @@ const CheckoutPage = () => {
                                     </Row>
                                     <hr />
                                     <Row>
+                                        <Col md={8}>Total</Col>
+                                        <Col md={4} className='fw-bolder'>₹ {totalOfProduct().toFixed(2)}</Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
                                         <Col md={5}></Col>
-                                        <Col md={7} className='fw-bolder text-success ' style={{ marginRight: '1rem' }}> You Save ₹ {savedMoney().toFixed(2)}</Col>
+                                        <Col md={7}
+                                            className='fw-bolder text-success'
+                                            style={{ marginRight: '1rem' }}
+                                        > You Save ₹ {savedMoney().toFixed(2)}
+                                        </Col>
+
                                     </Row>
                                 </ListGroup.Item>
                             </ListGroup>
-                            <Button variant="success" className="mt-3" block>
+                            <Button
+                                variant="success"
+                                className="mt-3"
+                                block
+                                onClick={handleShowAddress}
+                                disabled={cartItems == 0}
+                            >
                                 Place Order
                             </Button>
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
+            <OrderPlacement show={showAddress} handleClose={handleCloseAddress} address={address} />
         </Container>
     );
 };

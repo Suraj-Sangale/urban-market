@@ -27,33 +27,48 @@ const cartReducer = (state = initialState, action) => {
       }
 
     case 'REMOVE_FROM_CART':
-      const { productId } = action.payload;
-      const updatedCartItems = state.cartItems.filter(item => item.id !== productId);
-      const removedItem = state.cartItems.find(item => item.id === productId);
+      const { productId, productQuantity } = action.payload;
+      if (productQuantity > 1) {
+        const updatedCartItems = state.cartItems.map(item => {
+          if (item.id === productId) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        });
+        return {
+          ...state,
+          cartItems: updatedCartItems,
+          totalItems: state.totalItems - 1,
+        };
+      } else {
+        const updatedCartItems = state.cartItems.filter(item => item.id !== productId);
+        const removedItem = state.cartItems.find(item => item.id === productId);
 
-      return {
-        ...state,
-        cartItems: updatedCartItems,
-        totalItems: state.totalItems - (removedItem ? removedItem.quantity : 0),
-      };
+        return {
+          ...state,
+          cartItems: updatedCartItems,
+          totalItems: state.totalItems - (removedItem ? removedItem.quantity : 0),
+        };
+      }
 
-      case 'UPDATE_QUANTITY':
-        const { productId: updateProductId, quantity: updateQuantity } = action.payload;
-        
-        const updatedItem = state.cartItems.find(item => item.id === updateProductId);
-      
-        if (updatedItem) {
-          return {
-            ...state,
-            cartItems: state.cartItems.map(item =>
-              item.id === updateProductId ? { ...item, quantity: updateQuantity } : item
-            ),
-            totalItems: state.totalItems + (updateQuantity - (updatedItem.quantity || 0)),
-          };
-        } else {
-          return state;
-        }
-      
+
+    case 'UPDATE_QUANTITY':
+      const { productId: updateProductId, quantity: updateQuantity } = action.payload;
+
+      const updatedItem = state.cartItems.find(item => item.id === updateProductId);
+
+      if (updatedItem) {
+        return {
+          ...state,
+          cartItems: state.cartItems.map(item =>
+            item.id === updateProductId ? { ...item, quantity: updateQuantity } : item
+          ),
+          totalItems: state.totalItems + (updateQuantity - (updatedItem.quantity || 0)),
+        };
+      } else {
+        return state;
+      }
+
 
     default:
       return state;
