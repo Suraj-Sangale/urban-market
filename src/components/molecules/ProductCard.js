@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap';
 import RoundedButton from './RoundedButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/Actions';
 
 
@@ -9,16 +9,24 @@ import { addToCart } from '../../redux/Actions';
 const ProductCard = ({ product }) => {
     const [cartQuantity, setCartQuantity] = useState(0);
     const dispatch = useDispatch();
+    const {totalItems} = useSelector(state => state.cart);
 
-    const onClickAddToCart = (e) => {
+    const onClickAddToCart = (product) => {
+
         setCartQuantity(cartQuantity + 1);
-        // dispatch(addToCart(cartQuantity));
-        dispatch({ type: 'ADD_TO_CART', payload: { aa: 'shjs', jdd: 1 } });
-
+        dispatch({ type: 'ADD_TO_CART', payload: product });
+        
     };
-    const onClickDecrement = () => {
-        setCartQuantity(cartQuantity - 1);
-        dispatch({ type: 'REMOVE_FROM_CART', payload: { aa: 'shjs', jdd: 1 } });
+    const onClickIncrement = (product) => {
+        console.log('totalItems',totalItems);
+        setCartQuantity(cartQuantity + 1 )
+        dispatch({ type: 'UPDATE_QUANTITY', payload: { updateProductId: product.id, updateQuantity: cartQuantity + 1 } });
+        
+    };
+    const onClickDecrement = (product) => {
+        setCartQuantity(cartQuantity - 1 )
+        dispatch({ type: 'REMOVE_FROM_CART', payload: { productId: product.id} });
+
     };
 
     return (
@@ -26,7 +34,7 @@ const ProductCard = ({ product }) => {
             <Card.Img variant="top" src={product.imageUrl} />
             <Card.Body>
                 <Card.Text className="text-muted">{product.description.length > 30 ? `${product.description.slice(0, 30)}...` : product.description}</Card.Text>
-                <Card.Title> ₹{product.dealPrice}</Card.Title>
+                <Card.Title> ₹{product.price}</Card.Title>
 
                 <div className='ODPrice'>
                     <div className='originalPrice'>₹{product.originalPrice}</div>
@@ -39,7 +47,7 @@ const ProductCard = ({ product }) => {
                 {cartQuantity <= 0 && (
                     <Button
                         variant="primary"
-                        onClick={(e) => onClickAddToCart(e)}
+                        onClick={() => onClickAddToCart(product)}
                         disabled={cartQuantity > 0}
                         className='my-1 text-center w-100 rounded-pill'
                     >
@@ -49,12 +57,9 @@ const ProductCard = ({ product }) => {
 
                 {cartQuantity > 0 && (
                     <div className="d-flex justify-content-between mt-2">
-                        {/* <Button variant="outline-secondary" style={{ borderRadius: '100%', }} onClick={onClickDecrement}>+</Button> */}
-
-                        <RoundedButton onClick={onClickDecrement}>-</RoundedButton>
+                        <RoundedButton onClick={() => onClickDecrement(product)}>-</RoundedButton>
                         <span className="m-2 ">{cartQuantity}</span>
-                        <RoundedButton onClick={(e) => onClickAddToCart(e)}>+</RoundedButton>
-                        {/* <Button variant="outline-secondary" style={{ borderRadius: '100%' }} onClick={onClickAddToCart}>+</Button> */}
+                        <RoundedButton onClick={() => onClickAddToCart(product)}>+</RoundedButton>
                     </div>
                 )}
             </Card.Body>

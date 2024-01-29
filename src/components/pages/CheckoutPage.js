@@ -1,40 +1,72 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button, ListGroup, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, ListGroup, Form, Image } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import RoundedButton from '../molecules/RoundedButton';
+import { combineArrObject, findArrObject } from '../Data/GenericAction';
 
 const CheckoutPage = () => {
-    const cartItems = [
-        { id: 1, name: 'Product 1', price: 20, quantity: 2 },
-        { id: 2, name: 'Product 2', price: 30, quantity: 1 },
-    ];
+    const dispatch = useDispatch();
+    const { cartItems } = useSelector(state => state.cart);
 
-    const [quantity, setQuantity] = useState({});
+    // const uniqueCartItems = combineArrObject(cartItems);
+    console.log('cartItems', cartItems);
+    const uniqueCartItems = cartItems;
+    // console.log('uniqueCartItems',uniqueCartItems);
 
-    const handleIncrement = (productId) => {
-        setQuantity((prevQuantity) => ({
-            ...prevQuantity,
-            [productId]: (prevQuantity[productId] || 0) + 1,
-        }));
-    };
 
-    const handleDecrement = (productId) => {
-        setQuantity((prevQuantity) => ({
-            ...prevQuantity,
-            [productId]: Math.max((prevQuantity[productId] || 0) - 1, 0),
-        }));
-    };
+    const [cartQuantity, setCartQuantity] = useState(1);
+
 
     const calculateTotal = () => {
         let totalPrice = 0;
 
-        cartItems.forEach((item) => {
-            totalPrice += (item.price * (quantity[item.id] || 0));
-        });
+        // cartItems.forEach((item) => {
+        //     totalPrice += (item.price * (quantity[item.id] || 0));
+        // });
 
         return totalPrice;
     };
+    const savedMoney = () => {
+        let totalsavedMoney = 0;
+
+        uniqueCartItems.forEach((item) => {
+            totalsavedMoney += ((item.originalPrice - item.price)) * item.quantity;
+        });
+
+        return totalsavedMoney;
+    };
+    const totalOfProduct = () => {
+        let total = 0;
+        uniqueCartItems.forEach((item) => {
+            total += (item.price * item.quantity);
+        });
+        return total;
+    };
+    const totalOfProductMRP = () => {
+        let total = 0;
+        uniqueCartItems.forEach((item) => {
+            total += (item.originalPrice * item.quantity);
+        });
+        return total;
+    };
+    const onClickAddToCart = (product) => {
+
+        setCartQuantity(cartQuantity + 1);
+        dispatch({ type: 'ADD_TO_CART', payload: product });
+
+    };
+
+    const onClickDecrement = (product) => {
+        setCartQuantity(cartQuantity - 1)
+        dispatch({ type: 'REMOVE_FROM_CART', payload: { productId: product.id } });
+
+    };
+    const onClickIncrement = (product) => {
+        dispatch({ type: 'REMOVE_FROM_CART', payload: product });
+    };
 
     return (
-        <Container style={{ marginTop: '12rem' }}>
+        <Container style={{ marginTop: '9rem' }}>
             <Row>
                 <Col md={8}>
                     <Card>
@@ -43,37 +75,31 @@ const CheckoutPage = () => {
                         </Card.Header>
                         <Card.Body>
                             <ListGroup variant="flush">
-                                {cartItems.map((item) => (
+                                {uniqueCartItems.map((item) =>
+                                // console.log('item',item)
+                                (
                                     <ListGroup.Item key={item.id}>
                                         <Row>
-                                            <Col md={8}>
-                                                <strong>{item.name}</strong>
-                                                <p>Price: ${item.price}</p>
-                                            </Col>
                                             <Col md={4}>
-                                                <Form>
-                                                    <Form.Group controlId={`quantity_${item.id}`}>
-                                                        <Form.Label>Quantity</Form.Label>
-                                                        <Form.Control
-                                                            type="number"
-                                                            value={quantity[item.id] || 0}
-                                                            onChange={() => { }}
-                                                        />
-                                                    </Form.Group>
-                                                </Form>
-                                                <Button
-                                                    variant="outline-secondary"
-                                                    className="mr-2"
-                                                    onClick={() => handleIncrement(item.id)}
-                                                >
-                                                    +
-                                                </Button>
-                                                <Button
-                                                    variant="outline-secondary"
-                                                    onClick={() => handleDecrement(item.id)}
-                                                >
-                                                    -
-                                                </Button>
+                                                <Image style={{ border: 'none' }} src={item.imageUrl} alt={item.name} thumbnail />
+                                            </Col>
+                                            <Col md={5}>
+                                                <strong className=' APName '>{item.name}</strong>
+                                                <div >
+                                                    <span className='APPrice '>₹{(item.price * item.quantity).toFixed(2)}</span>
+                                                    <span className='APoriginalPrice'>₹{item.originalPrice}</span> <br />
+                                                    <span className='APDiscount'> You save ₹ {((item.originalPrice - item.price) * item.quantity).toFixed(2)}</span>
+                                                </div>
+                                            </Col>
+                                            <Col md={3}>
+                                                <div className='COTotalCard' >
+                                                    {/* <span className='COTotal'>₹{totalOfProduct().toFixed(2)}</span> */}
+                                                    <div className="d-flex justify-content-between">
+                                                        <RoundedButton onClick={() => onClickDecrement(item)}>-</RoundedButton>
+                                                        <span className="m-2 ">{cartQuantity}</span>
+                                                        <RoundedButton onClick={() => onClickAddToCart(item)}>+</RoundedButton>
+                                                    </div>
+                                                </div>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -92,8 +118,33 @@ const CheckoutPage = () => {
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col>MRP Total</Col>
-                                        <Col>${calculateTotal()}</Col>
+                                        <Col md={8}>MRP Total</Col>
+                                        <Col md={4} className='fw-bolder'>₹ {totalOfProductMRP().toFixed(2)}</Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
+                                        <Col md={8} >Product Discount</Col>
+                                        <Col md={4} className='fw-bolder text-success'>₹ {savedMoney().toFixed(2)}</Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
+                                        <Col md={7}>Delivery Fee</Col>
+                                        <Col md={5} className='fw-bolder'> <span className=' text-success '> FREE </span><span className='text-muted text-decoration-line-through' > ₹40.00</span> </Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
+                                        <Col md={8}>Total</Col>
+                                        <Col md={4} className='fw-bolder'>₹ {totalOfProduct().toFixed(2)}</Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
+                                        <Col md={8}>Payment Method</Col>
+                                        <Col md={4} className='fw-bolder'> COD</Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
+                                        <Col md={5}></Col>
+                                        <Col md={7} className='fw-bolder text-success ' style={{ marginRight: '1rem' }}> You Save ₹ {savedMoney().toFixed(2)}</Col>
                                     </Row>
                                 </ListGroup.Item>
                             </ListGroup>

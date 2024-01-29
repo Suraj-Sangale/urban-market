@@ -17,7 +17,7 @@ const UmNavBar = () => {
   const navigate = useNavigate()
 
   const { cartItems } = cartState;
-  let quantity = cartItems.length
+  let quantity = [...new Set(cartItems)].length
   const handleSearch = (e) => {
     e.preventDefault();
     const searchTerm = e.target.elements.searchTerm.value;

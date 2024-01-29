@@ -96,3 +96,15 @@ font-size: 1.2rem;
   font-size: 10px;
   font-weight: 500;
 }
+/* checkout */
+
+.COTotal{
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.COTotalCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
