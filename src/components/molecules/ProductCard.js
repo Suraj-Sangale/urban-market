@@ -9,23 +9,30 @@ import { addToCart } from '../../redux/Actions';
 const ProductCard = ({ product }) => {
     const [cartQuantity, setCartQuantity] = useState(0);
     const dispatch = useDispatch();
-    const {totalItems} = useSelector(state => state.cart);
+    const { totalItems, cartItems } = useSelector(state => state.cart);
 
     const onClickAddToCart = (product) => {
 
         setCartQuantity(cartQuantity + 1);
         dispatch({ type: 'ADD_TO_CART', payload: product });
-        
+
     };
     const onClickIncrement = (product) => {
-        console.log('totalItems',totalItems);
-        setCartQuantity(cartQuantity + 1 )
+        console.log('totalItems', totalItems);
+        setCartQuantity(cartQuantity + 1)
         dispatch({ type: 'UPDATE_QUANTITY', payload: { updateProductId: product.id, updateQuantity: cartQuantity + 1 } });
-        
+
     };
     const onClickDecrement = (product) => {
-        setCartQuantity(cartQuantity - 1 )
-        dispatch({ type: 'REMOVE_FROM_CART', payload: { productId: product.id} });
+        console.log('totalItems',totalItems);
+        console.log('cartItems',cartItems);
+        setCartQuantity(cartQuantity - 1)
+        dispatch({
+            type: 'REMOVE_FROM_CART', payload: {
+                productId: product?.id,
+                productQuantity: cartQuantity
+            }
+        });
 
     };
 
