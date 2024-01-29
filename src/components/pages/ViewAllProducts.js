@@ -5,12 +5,9 @@ import { Allproducts } from '../Data/Data';
 import AllProductCard from '../molecules/AllProductCard';
 
 const ViewAllProducts = () => {
-    // Dummy product data, replace it with your actual data
-
 
     return (
         <Container fluid style={{ marginTop: '8rem' }} className='px-5'>
-            {/* Breadcrumbs */}
             <Row className="mb-2">
                 <Col>
                     <Breadcrumb>

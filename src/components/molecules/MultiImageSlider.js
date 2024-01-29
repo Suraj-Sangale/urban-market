@@ -5,7 +5,7 @@ import "./TopDeals.css";
 import Heading from "./Heading";
 
 const MultiImageSlider = (props) => {
-    const { desktopItems, mobileItems, tabletItems, title, ImgArr } = props;
+    const { desktopItems, mobileItems, tabletItems, title, ImgArr, onclickImage } = props;
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -39,8 +39,8 @@ const MultiImageSlider = (props) => {
                 {ImgArr?.map((item, index) => {
                     return (
                         <div className="slider" key={index}>
-                            <div className="image-container">
-                                <img src={item?.url} alt="movie" className="hover-image" />
+                            <div className="image-container" >
+                                <img src={item?.url} alt="movie" onClick={onclickImage} className="hover-image" />
                             </div>
                         </div>
                     );

@@ -36,10 +36,9 @@ const UmNavBar = () => {
   return (
     <>
 
-      <Navbar expand="lg" className="bg-body-tertiary fixed-top" style={{ height: '5rem' }} >
+      <Navbar expand="lg" className="fixed-top UmNavBar">
         <Container >
-
-          <Navbar.Brand href="/">Urban Market</Navbar.Brand>
+          <Navbar.Brand href="/" className='text-white'>Urban Market</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'flex-end' }}>
             <Form className="d-flex " onSubmit={(e) => handleSearch(e)} inline>
@@ -47,7 +46,7 @@ const UmNavBar = () => {
             </Form>
             <Nav className="ml-auto">
               <div className="cart-icon-container">
-                <Nav.Link onClick={handleCartClick}>
+                <Nav.Link onClick={handleCartClick} className='text-white'>
                   <FaShoppingCart style={{ fontSize: '20px' }} />
 
                   <div className="cart-badge">
@@ -55,13 +54,13 @@ const UmNavBar = () => {
                   </div>
                 </Nav.Link>
               </div>
-              <Nav.Link onClick={handleSignIn}>
+              <Nav.Link onClick={handleSignIn} className='text-white'>
                 <IoPersonSharp style={{ fontSize: '20px' }} /> Sign In</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Navbar style={{ backgroundColor: 'pink', marginTop: '5rem' }} fixed="top">
+      <Navbar className='UmNavBarSecondary' fixed="top">
         <Container>
           <SingleDropdown title="Categories" options={Categories.Groceries} />
           <SingleDropdown title="Fruits" options={Categories.Fruits} />

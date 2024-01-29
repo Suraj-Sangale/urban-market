@@ -5,7 +5,7 @@ const SingleDropdown = ({ title, options }) => {
   return (
     <NavDropdown title={title} id="basic-nav-dropdown">
       {options.map((option, index) => (
-        <NavDropdown.Item key={index} href={`#${option.toLowerCase().replace(/\s+/g, '-')}`}>
+        <NavDropdown.Item  key={index} href={`/products`}>
           {option}
         </NavDropdown.Item>
       ))}
