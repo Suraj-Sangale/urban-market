@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, ListGroup, Form, Image, Breadcrumb } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import RoundedButton from '../molecules/RoundedButton';
@@ -9,6 +9,7 @@ const CheckoutPage = () => {
     const dispatch = useDispatch();
     const { cartItems } = useSelector(state => state.cart);
     const [showAddress, setShowAddress] = useState(false);
+    const [isSmallerThanLg, setIsSmallerThanLg] = useState(false);
 
     const handleShowAddress = () => setShowAddress(true);
     const handleCloseAddress = () => setShowAddress(false);
@@ -78,12 +79,19 @@ const CheckoutPage = () => {
         });
 
     };
-    const onClickIncrement = (product) => {
-        dispatch({ type: 'REMOVE_FROM_CART', payload: product });
-    };
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallerThanLg(window.innerWidth < 992);
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
-        <Container style={{ marginTop: '9rem' }}>
+        <Container className={isSmallerThanLg ? 'mt-5' : 'mt-9'} >
             <Row className="mb-2">
                 <Col>
                     <Breadcrumb>
@@ -100,37 +108,38 @@ const CheckoutPage = () => {
                             <h5>My Cart</h5>
                         </Card.Header>
                         <Card.Body>
-                            <ListGroup variant="flush">
-                                {uniqueCartItems.map((item) =>
-                                // console.log('item',item)
-                                (
-                                    <ListGroup.Item key={item.id}>
-                                        <Row>
-                                            <Col md={4}>
-                                                <Image style={{ border: 'none' }} src={item.imageUrl} alt={item.name} thumbnail />
-                                            </Col>
-                                            <Col md={5}>
-                                                <strong className=' APName '>{item.name}</strong>
-                                                <div >
-                                                    <span className='APPrice '>₹{(item.price * item.quantity).toFixed(2)}</span>
-                                                    <span className='APoriginalPrice'>₹{item.originalPrice}</span> <br />
-                                                    <span className='APDiscount'> You save ₹ {((item.originalPrice - item.price) * item.quantity).toFixed(2)}</span>
-                                                </div>
-                                            </Col>
-                                            <Col md={3}>
-                                                <div className='COTotalCard' >
-                                                    {/* <span className='COTotal'>₹{totalOfProduct().toFixed(2)}</span> */}
-                                                    <div className="d-flex justify-content-between">
-                                                        <RoundedButton onClick={() => onClickDecrement(item)}>-</RoundedButton>
-                                                        <span className="m-2 ">{item.quantity}</span>
-                                                        <RoundedButton onClick={() => onClickAddToCart(item)}>+</RoundedButton>
+                            {uniqueCartItems.length == 0 ?
+                                <h5>Your Cart Is Empty</h5> : <ListGroup variant="flush">
+                                    {uniqueCartItems.map((item) =>
+                                    // console.log('item',item)
+                                    (
+                                        <ListGroup.Item key={item.id}>
+                                            <Row>
+                                                <Col md={4}>
+                                                    <Image style={{ border: 'none' }} src={item.imageUrl} alt={item.name} thumbnail />
+                                                </Col>
+                                                <Col md={5}>
+                                                    <strong className=' APName '>{item.name}</strong>
+                                                    <div >
+                                                        <span className='APPrice '>₹{(item.price * item.quantity).toFixed(2)}</span>
+                                                        <span className='APoriginalPrice'>₹{item.originalPrice}</span> <br />
+                                                        <span className='APDiscount'> You save ₹ {((item.originalPrice - item.price) * item.quantity).toFixed(2)}</span>
                                                     </div>
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
+                                                </Col>
+                                                <Col md={3}>
+                                                    <div className='COTotalCard' >
+                                                        {/* <span className='COTotal'>₹{totalOfProduct().toFixed(2)}</span> */}
+                                                        <div className="d-flex justify-content-between">
+                                                            <RoundedButton onClick={() => onClickDecrement(item)}>-</RoundedButton>
+                                                            <span className="m-2 ">{item.quantity}</span>
+                                                            <RoundedButton onClick={() => onClickAddToCart(item)}>+</RoundedButton>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>}
                         </Card.Body>
                     </Card>
                 </Col>
@@ -209,7 +218,7 @@ const CheckoutPage = () => {
                 </Col>
             </Row>
             <OrderPlacement show={showAddress} handleClose={handleCloseAddress} address={address} />
-        </Container>
+        </Container >
     );
 };
 

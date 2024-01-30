@@ -37,30 +37,30 @@ const UmNavBar = () => {
     <>
 
       <Navbar expand="lg" className="fixed-top UmNavBar">
-        <Container >
-          <Navbar.Brand href="/" className='text-white'>Urban Market</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'flex-end' }}>
-            <Form className="d-flex " onSubmit={(e) => handleSearch(e)} inline>
-              <FormControl type="text" name="searchTerm" placeholder="🔍Search Urban Market..." className="mr-sm-2 rounded-pill" style={{ width: '20rem', margin: '1rem' }} />
-            </Form>
-            <Nav className="ml-auto">
-              <div className="cart-icon-container">
-                <Nav.Link onClick={handleCartClick} className='text-white'>
-                  <FaShoppingCart style={{ fontSize: '20px' }} />
+        <Container className='d-flex align-items-center ' >
+          <Navbar.Brand href="/" className='text-white d-none d-md-block'>Urban Market</Navbar.Brand>
+          <Form className="d-flex search-form m-0" onSubmit={(e) => handleSearch(e)} inline>
+            <FormControl type="text" name="searchTerm" placeholder="🔍Search Urban Market..." className="mr-sm-2 rounded-pill" style={{ width: '20rem', margin: '1rem' }} />
+          </Form>
+          <div id="basic-navbar-nav " className='d-flex justify-content-end' >
+
+            {/* <Nav className="ml-auto"> */}
+              <div className="cart-icon-container" style={{marginRight:'1rem'}}>
+                <Nav.Link onClick={handleCartClick} className='text-white '>
+                  <FaShoppingCart style={{ fontSize: '22px' }} />
 
                   <div className="cart-badge">
                     <span>{quantity < -1 ? 0 : quantity}</span>
                   </div>
                 </Nav.Link>
               </div>
-              <Nav.Link onClick={handleSignIn} className='text-white'>
+              <Nav.Link onClick={handleSignIn} className='text-white d-none d-md-block'>
                 <IoPersonSharp style={{ fontSize: '20px' }} /> Sign In</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+            {/* </Nav> */}
+          </div>
         </Container>
       </Navbar>
-      <Navbar className='UmNavBarSecondary' fixed="top">
+      <Navbar className='UmNavBarSecondary d-none d-lg-block' fixed="top" >
         <Container>
           <SingleDropdown title="Categories" options={Categories.Groceries} />
           <SingleDropdown title="Fruits" options={Categories.Fruits} />

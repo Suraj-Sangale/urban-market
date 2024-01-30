@@ -1,13 +1,24 @@
 // Import necessary libraries
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Col, Container, Row, Card, Form } from 'react-bootstrap';
 import { Allproducts } from '../Data/Data';
 import AllProductCard from '../molecules/AllProductCard';
 
 const ViewAllProducts = () => {
+    const [isSmallerThanLg, setIsSmallerThanLg] = useState(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallerThanLg(window.innerWidth < 992);
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
-        <Container fluid style={{ marginTop: '8rem' }} className='px-5'>
+        <Container fluid className={isSmallerThanLg ? 'mt-6 px-5' : 'mt-9 px-5' } >
             <Row className="mb-2">
                 <Col>
                     <Breadcrumb>

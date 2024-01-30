@@ -87,8 +87,8 @@ font-size: 1.2rem;
 
 .cart-badge {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -10px;
+  right: -10px;
   background-color: red;
   color: white;
   border-radius: 50%;
@@ -122,4 +122,20 @@ font-size: 1.2rem;
   margin-top: 5rem;
   background-color: #0c5273;
   color: white;
+}
+.search-form {
+  width: 20rem;
+  margin: 1rem;
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    width: 3rem;
+  }
+}
+.mt-9{
+  margin-top: 9rem;
+}
+.mt-6{
+  margin-top: 6rem;
 }
