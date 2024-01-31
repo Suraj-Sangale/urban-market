@@ -15,9 +15,9 @@ const CheckoutPage = () => {
     const handleCloseAddress = () => setShowAddress(false);
     const address = {
         name: 'Suraj Sangale',
-        lineOne: ' Endurance Tech ',
-        lineTwo: 'Office No 809, Goodwill Infinity CHS, near Fire Brigade Station, opp. Prime Mall Lane, Sector 12, Kharghar, ',
-        pinCode: ' Navi Mumbai, Maharashtra 410210',
+        lineOne: '06/01 Trimutri Complex,',
+        lineTwo: 'Maharashtra Nagar Mankhurd,',
+        pinCode: 'Mumbai, Maharashtra 410210',
         PhoneNumber: '2291329',
     }
 
