@@ -123,7 +123,7 @@ const CheckoutPage = () => {
                                                     <strong className=' APName '>{item.name}</strong>
                                                     <div >
                                                         <span className='APPrice '>₹{(item.price * item.quantity).toFixed(2)}</span>
-                                                        <span className='APoriginalPrice'>₹{item.originalPrice}</span> <br />
+                                                        <span className='APoriginalPrice'>₹{(item.originalPrice * item.quantity).toFixed(2)}</span> <br />
                                                         <span className='APDiscount'> You save ₹ {((item.originalPrice - item.price) * item.quantity).toFixed(2)}</span>
                                                     </div>
                                                 </Col>
