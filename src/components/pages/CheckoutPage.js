@@ -14,9 +14,10 @@ const CheckoutPage = () => {
     const handleShowAddress = () => setShowAddress(true);
     const handleCloseAddress = () => setShowAddress(false);
     const address = {
-        name: 'John Doe',
-        street: ' 5 Sohini Bldg, D J Rd, Vile Parle West (west),',
-        pinCode: 'Mumbai 400088, Maharashtra',
+        name: 'Suraj Sangale',
+        lineOne: ' Endurance Tech ',
+        lineTwo: 'Office No 809, Goodwill Infinity CHS, near Fire Brigade Station, opp. Prime Mall Lane, Sector 12, Kharghar, ',
+        pinCode: ' Navi Mumbai, Maharashtra 410210',
         PhoneNumber: '2291329',
     }
 

@@ -19,10 +19,11 @@ const OrderPlacement = ({ show, handleClose, address }) => {
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <div style={{ borderRadius: '10px', border: '1px solid black', padding: '20px' }}>
-                    <p>{address.name}</p>
-                    <p>{address.street}</p>
-                    <p>{address.pinCode}</p>
-                    <p>+91 - {address.PhoneNumber}</p>
+                    <div className='fs-5 fw-600'>{address.name}</div>
+                    <div>{address.lineOne}</div>
+                    <div>{address.lineTwo}</div>
+                    <div>{address.pinCode}</div>
+                    <div>+91 - {address.PhoneNumber}</div>
                     {/* Add more lines for additional address details */}
                 </div>
 
