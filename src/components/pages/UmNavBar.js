@@ -31,14 +31,15 @@ const UmNavBar = () => {
 
   const handleSignIn = () => {
     alert('You are not signed in');
-  };
+  }; 
+  const brandText = window.innerWidth < 576 ? 'UM' : 'Urban Market';
 
   return (
     <>
 
       <Navbar expand="lg" className="fixed-top UmNavBar">
         <Container className='d-flex align-items-center ' >
-          <Navbar.Brand href="/" className='text-white d-none d-md-block'>Urban Market</Navbar.Brand>
+          <Navbar.Brand href="/" className='text-white'>{brandText}</Navbar.Brand>
           <Form className="d-flex search-form m-0" onSubmit={(e) => handleSearch(e)} inline>
             <FormControl type="text" name="searchTerm" placeholder="🔍Search Urban Market..." className="mr-sm-2 rounded-pill" style={{ width: '20rem', margin: '1rem' }} />
           </Form>
