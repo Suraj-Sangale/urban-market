@@ -8,6 +8,7 @@ const SpecialDeals = () => {
     const onclickImage = () => {
         navigate('/products');
       };
+// changes
     return (
         <div>
             <MultiImageSlider
