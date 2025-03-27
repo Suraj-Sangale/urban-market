@@ -4,7 +4,7 @@ function* addToCartSaga(action) {
   yield put({ type: 'ADD_TO_CART', payload: action.payload });
 }
 
-
+// test
 function* cartSaga() {
   yield takeEvery('ASYNC_ADD_TO_CART', addToCartSaga);
 }
